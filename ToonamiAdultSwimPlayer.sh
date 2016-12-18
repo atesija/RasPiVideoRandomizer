@@ -7,11 +7,11 @@ setterm -cursor off
 #These are full-length movies
 MOVIES="/media/pi/Windfish/Videos/Movies"
 #These are shows or series
-SERIES="/media/pi/Windfish/Videos/Series"
+SHOWS="/media/pi/Windfish/Videos/Series"
 #These are intros/openings that will play once initially
 INTROS="/media/pi/Windfish/Intros"
 #These are bumps/promos that may play between each show
-BETWEEN="/media/pi/Windfish/Extras"
+BUMPS="/media/pi/Windfish/Extras"
 
 #Video player (You may need to change this if you don't have omxplayer installed. It is installed on Raspbian by default)
 VIDEOPLAYER="omxplayer"
@@ -19,9 +19,9 @@ VIDEOPLAYERCOMMANDS="-o hdmi -b"
 
 #Get all videos in the directories with filetype mp4, mkv, avi, ogm, and mov
 find "$MOVIES" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > movies.txt
-find "$SERIES" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > series.txt
+find "$SHOWS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > shows.txt
 find "$INTROS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > intros.txt
-find "$BETWEEN" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > between.txt
+find "$BUMPS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > bumps.txt
 
 #Check if the file randomizer exists, if not build it
 if [ ! -f FileRandomizer ]; then
@@ -31,7 +31,7 @@ fi
 #Run custom c++ script to randomize the videos
 #Outputs the file videos.txt which is read in the loop below
 ./FileRandomizer
-
+exit 1
 #Loop through all found files
 while IFS= read -r videofile
 do
