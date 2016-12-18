@@ -68,8 +68,12 @@ int main()
         OutputVideosToFile(intros, 1, videoFileOutput);
 	while(!series.empty() || !movies.empty())
 	{
-                OutputVideosToFile(series, rand() % 10 + 5, videoFileOutput);
-                OutputVideosToFile(between, rand() % 3, videoFileOutput);
+                int numberOfSeries = rand() % 10 + 5;
+                for(int i = 0; i < numberOfSeries; ++i)
+                {
+                        OutputVideosToFile(series, 1, videoFileOutput);
+                        OutputVideosToFile(between, rand() % 3, videoFileOutput);
+                }
                 OutputVideosToFile(movies, 1, videoFileOutput);
                 OutputVideosToFile(between, rand() % 3, videoFileOutput);
 	}
