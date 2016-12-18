@@ -14,6 +14,64 @@ const string BUMPS_FILENAME = "bumps.txt";
 
 const string VIDEO_OUTPUT_FILENAME = "videos.txt";
 
+const string CONFIG_FILENAME = "FileRandomizer.config";
+
+struct config
+{
+        bool playMovies;
+        bool playShows;
+        bool playIntro;
+        bool playBumps;
+        int minBumps;
+        int maxBumps;
+        int minShows;
+        int maxShows;
+};
+
+void ReadConfigFile(config& configuration)
+{
+        ifstream configFile(CONFIG_FILENAME.c_str());
+	string configOption;
+	while (getline(configFile, configOption)) 
+	{
+                if(configOption == "PlayMovies")
+                {
+                        configFile >> configuration.playMovies;
+                }
+                else if(configOption == "PlayShows")
+                {
+                        configFile >> configuration.playShows;
+                }
+                else if(configOption == "PlayIntro")
+                {
+                        configFile >> configuration.playIntro;
+                }
+                else if(configOption == "PlayBumps")
+                {
+                        configFile >> configuration.playBumps;
+                }
+                else if(configOption == "MinBumps")
+                {
+                        configFile >> configuration.minBumps;
+                }
+                else if(configOption == "MaxBumps")
+                {
+                        configFile >> configuration.maxBumps;
+                        configuration.maxBumps++;
+                }
+                else if(configOption == "MinShows")
+                {
+                        configFile >> configuration.minShows;
+                }
+                else if(configOption == "MaxShows")
+                {
+                        configFile >> configuration.maxShows;
+                        configuration.maxShows++;
+                }
+	}
+        configFile.close();
+}
+
 void ReadFileIntoVector(string filename, vector<string>& fileHolder)
 {
 	ifstream videoFileInput;
@@ -45,8 +103,16 @@ void OutputVideosToFile(vector<string>& videosFrom, int numberOfVideos, ofstream
         }
 }
 
+int GetRandomNumberBetween(int min, int max)
+{
+        return (rand() % (max - min)) + min;
+}
+
 int main()
 {
+        config configuration;
+        ReadConfigFile(configuration);
+
         vector<string> movies;
         vector<string> shows;
         vector<string> intros;
@@ -65,17 +131,33 @@ int main()
 
 	ofstream videoFileOutput(VIDEO_OUTPUT_FILENAME.c_str());
 
-        OutputVideosToFile(intros, 1, videoFileOutput);
-	while(!shows.empty() || !movies.empty())
+        if(configuration.playIntro)
+        {
+             OutputVideosToFile(intros, 1, videoFileOutput);
+        }
+	while((!shows.empty() && configuration.playShows) || (!movies.empty() && configuration.playMovies))
 	{
-                int numberOfShows= rand() % 10 + 5;
-                for(int i = 0; i < numberOfShows; ++i)
+                if(configuration.playShows)
                 {
-                        OutputVideosToFile(shows, 1, videoFileOutput);
-                        OutputVideosToFile(bumps, rand() % 3, videoFileOutput);
+                        int numberOfShows = GetRandomNumberBetween(configuration.minShows, configuration.maxShows);
+                        for(int i = 0; i < numberOfShows; ++i)
+                        {
+                                OutputVideosToFile(shows, 1, videoFileOutput);
+                                if(configuration.playBumps)
+                                {
+                                        OutputVideosToFile(bumps, GetRandomNumberBetween(configuration.minBumps, configuration.maxBumps), videoFileOutput);
+                                }
+                        }
                 }
-                OutputVideosToFile(movies, 1, videoFileOutput);
-                OutputVideosToFile(bumps, rand() % 3, videoFileOutput);
+
+                if(configuration.playMovies)
+               {
+                        OutputVideosToFile(movies, 1, videoFileOutput);
+                        if(configuration.playBumps)
+                        {
+                                OutputVideosToFile(bumps, GetRandomNumberBetween(configuration.minBumps, configuration.maxBumps), videoFileOutput);
+                        }
+               }
 	}
 
 	videoFileOutput.close();

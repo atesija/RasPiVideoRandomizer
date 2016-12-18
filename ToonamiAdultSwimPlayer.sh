@@ -31,7 +31,7 @@ fi
 #Run custom c++ script to randomize the videos
 #Outputs the file videos.txt which is read in the loop below
 ./FileRandomizer
-exit 1
+
 #Loop through all found files
 while IFS= read -r videofile
 do
