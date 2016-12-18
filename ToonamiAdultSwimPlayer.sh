@@ -23,10 +23,14 @@ find "$SERIES" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.og
 find "$INTROS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > intros.txt
 find "$BETWEEN" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > between.txt
 
+#Check if the file randomizer exists, if not build it
+if [ ! -f FileRandomizer ]; then
+    g++ FileRandomizer.cpp -o FileRandomizer
+fi
+
 #Run custom c++ script to randomize the videos
 #Outputs the file videos.txt which is read in the loop below
 ./FileRandomizer
-sleep 1;
 
 #Loop through all found files
 while IFS= read -r videofile
