@@ -15,7 +15,6 @@ BUMPS="/media/pi/Windfish/Extras"
 
 #Video player (You may need to change this if you don't have omxplayer installed. It is installed on Raspbian by default)
 VIDEOPLAYER="omxplayer"
-VIDEOPLAYERCOMMANDS="-o hdmi -b"
 
 #Get all videos in the directories with filetype mp4, mkv, avi, ogm, and mov
 find "$MOVIES" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > movies.txt
@@ -38,7 +37,7 @@ do
     echo -Playing "$videofile"
 
     #Play the video in another terminal to allow hotkeys to work with the player
-    lxterminal -e "$VIDEOPLAYER" "$VIDEOPLAYERCOMMANDS" "$videofile"
+    lxterminal -e "$VIDEOPLAYER" -o hdmi -b "$videofile"
     sleep 1;
 
     #Stay in this loop while VIDEOPLAYER is still running. Check every second
