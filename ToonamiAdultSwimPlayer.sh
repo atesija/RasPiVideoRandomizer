@@ -1,4 +1,5 @@
 #!/bin/sh
+#Written by Anthony Tesija www.AnthonyTesija.com 
 
 #Get rid of the cursor so we don't see it when videos are running
 setterm -cursor off
