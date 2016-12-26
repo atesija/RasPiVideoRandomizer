@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
@@ -28,7 +29,24 @@ struct config
         int maxBumps;
         int minShows;
         int maxShows;
+        vector<string> whitelist;
+        vector<string> blacklist;
 };
+
+void SplitStringIntoVector(string stringToSplit, char separator, vector<string>& outputStringList)
+{
+        stringstream stream(stringToSplit);
+        string split;
+        while(getline(stream, split, separator))
+        {
+                if(!split.empty())
+                {
+                        //Remove leading whitespace
+                        split.erase(split.begin(), std::find_if(split.begin(), split.end(), std::bind1st(std::not_equal_to<char>(), ' ')));
+                        outputStringList.push_back(split);
+                }
+        }
+}
 
 void ReadConfigFile(config& configuration)
 {
@@ -70,6 +88,24 @@ void ReadConfigFile(config& configuration)
                         configFile >> configuration.maxShows;
                         configuration.maxShows++;
                 }
+                else if(configOption == "Whitelist")
+                {
+                        string whitelistNames;
+                        getline(configFile, whitelistNames);
+                        if(whitelistNames.find("//") == string::npos)
+                        {
+                                SplitStringIntoVector(whitelistNames, ',', configuration.whitelist);
+                        }
+                }
+                else if(configOption == "Blacklist")
+                {
+                        string blacklistNames;
+                        getline(configFile, blacklistNames);
+                        if(blacklistNames.find("//") == string::npos)
+                        {
+                                SplitStringIntoVector(blacklistNames, ',', configuration.blacklist);
+                        }
+                }
 	}
         configFile.close();
 }
@@ -110,11 +146,62 @@ int GetRandomNumberBetween(int min, int max)
         return (rand() % (max - min)) + min;
 }
 
-int main()
+void WhitelistVideos(vector<string>& whitelist, vector<string>& videos)
 {
+        if(whitelist.empty() || videos.empty())
+        {
+                return;
+        }
+        
+        vector<string> prunedVideos;
+        for(int videoIndex = 0; videoIndex < videos.size(); ++videoIndex)
+        {
+                for(int i = 0; i < whitelist.size(); ++i)
+                {
+                        if (videos[videoIndex].find(whitelist[i]) != std::string::npos)
+                        {
+                                prunedVideos.push_back(videos[videoIndex]);
+                                break;
+                        }
+                }
+        }
+        
+        videos = prunedVideos;
+}
+
+void BlacklistVideos(vector<string>& blacklist, vector<string>& videos)
+{
+        if(blacklist.empty() || videos.empty())
+        {
+                return;
+        }
+        
+        vector<string> prunedVideos;
+        for(int videoIndex = 0; videoIndex < videos.size(); ++videoIndex)
+        {
+                bool videoBlacklisted = false;
+                for(int i = 0; i < blacklist.size(); ++i)
+                {
+                        if (videos[videoIndex].find(blacklist[i]) != std::string::npos)
+                        {
+                                videoBlacklisted = true;
+                                break;
+                        }
+                }
+                if(!videoBlacklisted)
+                {
+                        prunedVideos.push_back(videos[videoIndex]);
+                }
+        }
+        
+        videos = prunedVideos;
+}
+
+int main()
+{        
         config configuration;
         ReadConfigFile(configuration);
-
+        
         vector<string> movies;
         vector<string> shows;
         vector<string> intros;
@@ -124,6 +211,11 @@ int main()
         ReadFileIntoVector(SHOWS_FILENAME, shows);
         ReadFileIntoVector(INTROS_FILENAME, intros);
         ReadFileIntoVector(BUMPS_FILENAME, bumps);
+        
+        WhitelistVideos(configuration.whitelist, shows);
+        WhitelistVideos(configuration.whitelist, movies);
+        BlacklistVideos(configuration.blacklist, shows);
+        BlacklistVideos(configuration.blacklist, movies);
 
 	srand(time(NULL));
         ShuffleVideos(movies);
