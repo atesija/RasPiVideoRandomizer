@@ -31,6 +31,7 @@ struct config
         int maxShows;
         vector<string> whitelist;
         vector<string> blacklist;
+        bool seriesMode;
 };
 
 void SplitStringIntoVector(string stringToSplit, char separator, vector<string>& outputStringList)
@@ -105,6 +106,10 @@ void ReadConfigFile(config& configuration)
                         {
                                 SplitStringIntoVector(blacklistNames, ',', configuration.blacklist);
                         }
+                }
+                else if(configOption == "Series")
+                {
+                        configFile >> configuration.seriesMode;
                 }
 	}
         configFile.close();
