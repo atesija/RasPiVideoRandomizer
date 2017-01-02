@@ -24,8 +24,8 @@ find "$INTROS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.og
 find "$BUMPS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > bumps.txt
 
 #Check if the file randomizer exists, if not build it
-if [ ! -f FileRandomizer ]; then
-    g++ FileRandomizer.cpp -o FileRandomizer
+if [ ! -f Randomizer/FileRandomizer ]; then
+    g++ Randomizer/FileRandomizer.cpp -o Randomizer/FileRandomizer
 fi
 
 #Run custom c++ script to randomize the videos
