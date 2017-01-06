@@ -14,9 +14,7 @@ const string MOVIE_FILENAME = "movies.txt";
 const string SHOWS_FILENAME = "shows.txt";
 const string INTROS_FILENAME = "intros.txt";
 const string BUMPS_FILENAME = "bumps.txt";
-
 const string VIDEO_OUTPUT_FILENAME = "videos.txt";
-
 const string CONFIG_FILENAME = "FileRandomizer.config";
 
 struct config
@@ -81,55 +79,55 @@ void ReadConfigFile(config& configuration)
         }
         else if(configOption == "PlayShows")
         {
-                configFile >> configuration.playShows;
+            configFile >> configuration.playShows;
         }
         else if(configOption == "PlayIntro")
         {
-                configFile >> configuration.playIntro;
+            configFile >> configuration.playIntro;
         }
         else if(configOption == "PlayBumps")
         {
-                configFile >> configuration.playBumps;
+            configFile >> configuration.playBumps;
         }
         else if(configOption == "MinBumps")
         {
-                configFile >> configuration.minBumps;
+            configFile >> configuration.minBumps;
         }
         else if(configOption == "MaxBumps")
         {
-                configFile >> configuration.maxBumps;
-                configuration.maxBumps++;
+            configFile >> configuration.maxBumps;
+            configuration.maxBumps++;
         }
         else if(configOption == "MinShows")
         {
-                configFile >> configuration.minShows;
+            configFile >> configuration.minShows;
         }
         else if(configOption == "MaxShows")
         {
-                configFile >> configuration.maxShows;
-                configuration.maxShows++;
+            configFile >> configuration.maxShows;
+            configuration.maxShows++;
         }
         else if(configOption == "Whitelist")
         {
-                string whitelistNames;
-                getline(configFile, whitelistNames);
-                if(whitelistNames.find("//") == string::npos)
-                {
-                        SplitStringIntoVector(whitelistNames, ',', configuration.whitelist);
-                }
+            string whitelistNames;
+            getline(configFile, whitelistNames);
+            if(whitelistNames.find("//") == string::npos)
+            {
+                    SplitStringIntoVector(whitelistNames, ',', configuration.whitelist);
+            }
         }
         else if(configOption == "Blacklist")
         {
-                string blacklistNames;
-                getline(configFile, blacklistNames);
-                if(blacklistNames.find("//") == string::npos)
-                {
-                        SplitStringIntoVector(blacklistNames, ',', configuration.blacklist);
-                }
+            string blacklistNames;
+            getline(configFile, blacklistNames);
+            if(blacklistNames.find("//") == string::npos)
+            {
+                    SplitStringIntoVector(blacklistNames, ',', configuration.blacklist);
+            }
         }
         else if(configOption == "Series")
         {
-                configFile >> configuration.seriesMode;
+            configFile >> configuration.seriesMode;
         }
 	}
     configFile.close();
@@ -160,8 +158,8 @@ void OutputVideosToFile(vector<string>& videosFrom, int numberOfVideos, ofstream
     {
         if(!videosFrom.empty())
         {
-        outputFile << videosFrom.back() << endl;
-        videosFrom.pop_back();
+            outputFile << videosFrom.back() << endl;
+            videosFrom.pop_back();
         }
     }
 }
