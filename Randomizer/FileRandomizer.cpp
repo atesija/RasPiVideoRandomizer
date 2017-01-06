@@ -21,6 +21,10 @@ const string CONFIG_FILENAME = "FileRandomizer.config";
 
 struct config
 {
+    string moviesFolder;
+    string showsFolder;
+    string introsFolder;
+    string bumpsFolder;
     bool playMovies;
     bool playShows;
     bool playIntro;
@@ -55,9 +59,25 @@ void ReadConfigFile(config& configuration)
 	string configOption;
 	while (getline(configFile, configOption)) 
 	{
-        if(configOption == "PlayMovies")
+        if(configOption == "MoviesFolder")
         {
-                configFile >> configuration.playMovies;
+            configFile >> configuration.moviesFolder;
+        }
+        else if(configOption == "ShowsFolder")
+        {
+            configFile >> configuration.showsFolder;
+        }
+        else if(configOption == "IntrosFolder")
+        {
+            configFile >> configuration.introsFolder;
+        }
+        else if(configOption == "BumpsFolder")
+        {
+            configFile >> configuration.bumpsFolder;
+        }
+        else if(configOption == "PlayMovies")
+        {
+            configFile >> configuration.playMovies;
         }
         else if(configOption == "PlayShows")
         {
