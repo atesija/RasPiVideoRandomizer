@@ -18,10 +18,10 @@ BUMPS="/media/pi/Windfish/Extras"
 VIDEOPLAYER="omxplayer"
 
 #Get all videos in the directories with filetype mp4, mkv, avi, ogm, and mov
-find "$MOVIES" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > movies.txt
-find "$SHOWS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > shows.txt
-find "$INTROS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > intros.txt
-find "$BUMPS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > bumps.txt
+find "$MOVIES" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > Randomizer/movies.txt
+find "$SHOWS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > Randomizer/shows.txt
+find "$INTROS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > Randomizer/intros.txt
+find "$BUMPS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > Randomizer/bumps.txt
 
 #Check if the file randomizer exists, if not build it
 if [ ! -f Randomizer/FileRandomizer ]; then
@@ -30,7 +30,7 @@ fi
 
 #Run custom c++ script to randomize the videos
 #Outputs the file videos.txt which is read in the loop below
-./FileRandomizer
+./Randomizer/FileRandomizer
 
 #Loop through all found files
 while IFS= read -r videofile
@@ -46,4 +46,4 @@ do
     do
         sleep 1;
     done
-done < "videos.txt"
+done < "Randomizer/videos.txt"
