@@ -220,6 +220,33 @@ void BlacklistVideos(vector<string>& blacklist, vector<string>& videos)
     videos = prunedVideos;
 }
 
+string GetVideoSeries(string fullVideoPath, string seriesLocation)
+{
+    string videoSeries = fullVideoPath;
+    videoSeries.erase(0, seriesLocation.size());
+    videoSeries.erase(videoSeries.rend(), std::find_if(videoSeries.rend(), videoSeries.rbegin(), std::bind1st(std::not_equal_to<char>(), '/')));
+    return videoSeries;
+}
+
+void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation)
+{
+    vector<vector<string>> allVideoSeries;
+    string lastSeries;
+    int videoIndex = 0;
+    while(videoIndex < videoContainer.size())
+    {
+        vector<string> videoSeries;
+
+        cout << GetVideoSeries(videoContainer[videoIndex], seriesLocation);
+
+        if(!videoSeries.empty())
+        {
+            allVideoSeries.push_back(videoSeries);
+        }
+        ++videoIndex;
+    }
+}
+
 int main()
 {        
     config configuration;
@@ -241,8 +268,17 @@ int main()
     BlacklistVideos(configuration.blacklist, movies);
 
 	srand(time(NULL));
-    ShuffleVideos(movies);
-    ShuffleVideos(shows);
+
+    if(configuration.seriesMode)
+    {
+        ShuffleVideosInSeries(movies, configuration.moviesFolder);
+        ShuffleVideosInSeries(shows, configuration.showsFolder);
+    }
+    else
+    {
+        ShuffleVideos(movies);
+        ShuffleVideos(shows);
+    }
     ShuffleVideos(intros);
     ShuffleVideos(bumps);
 
