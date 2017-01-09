@@ -3,10 +3,12 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <ctime>
+
+#include "RandomizerConfiguration.h"
 
 using namespace std;
 
@@ -15,123 +17,6 @@ const string SHOWS_FILENAME = "shows.txt";
 const string INTROS_FILENAME = "intros.txt";
 const string BUMPS_FILENAME = "bumps.txt";
 const string VIDEO_OUTPUT_FILENAME = "videos.txt";
-const string CONFIG_FILENAME = "FileRandomizer.config";
-
-struct config
-{
-    string moviesFolder;
-    string showsFolder;
-    string introsFolder;
-    string bumpsFolder;
-    bool playMovies;
-    bool playShows;
-    bool playIntro;
-    bool playBumps;
-    int minBumps;
-    int maxBumps;
-    int minShows;
-    int maxShows;
-    vector<string> whitelist;
-    vector<string> blacklist;
-    bool seriesMode;
-};
-
-void SplitStringIntoVector(string stringToSplit, char separator, vector<string>& outputStringList)
-{
-    stringstream stream(stringToSplit);
-    string split;
-    while(getline(stream, split, separator))
-    {
-        if(!split.empty())
-        {
-            //Remove leading whitespace
-            split.erase(split.begin(), std::find_if(split.begin(), split.end(), std::bind1st(std::not_equal_to<char>(), ' ')));
-            outputStringList.push_back(split);
-        }
-    }
-}
-
-void ReadConfigFile(config& configuration)
-{
-    ifstream configFile(CONFIG_FILENAME.c_str());
-	string configOption;
-	while (getline(configFile, configOption)) 
-	{
-        if(configOption == "MoviesFolder")
-        {
-            configFile >> configuration.moviesFolder;
-        }
-        else if(configOption == "ShowsFolder")
-        {
-            configFile >> configuration.showsFolder;
-        }
-        else if(configOption == "IntrosFolder")
-        {
-            configFile >> configuration.introsFolder;
-        }
-        else if(configOption == "BumpsFolder")
-        {
-            configFile >> configuration.bumpsFolder;
-        }
-        else if(configOption == "PlayMovies")
-        {
-            configFile >> configuration.playMovies;
-        }
-        else if(configOption == "PlayShows")
-        {
-            configFile >> configuration.playShows;
-        }
-        else if(configOption == "PlayIntro")
-        {
-            configFile >> configuration.playIntro;
-        }
-        else if(configOption == "PlayBumps")
-        {
-            configFile >> configuration.playBumps;
-        }
-        else if(configOption == "MinBumps")
-        {
-            configFile >> configuration.minBumps;
-        }
-        else if(configOption == "MaxBumps")
-        {
-            configFile >> configuration.maxBumps;
-            configuration.maxBumps++;
-        }
-        else if(configOption == "MinShows")
-        {
-            configFile >> configuration.minShows;
-        }
-        else if(configOption == "MaxShows")
-        {
-            configFile >> configuration.maxShows;
-            configuration.maxShows++;
-        }
-        else if(configOption == "Whitelist")
-        {
-            string whitelistNames;
-            getline(configFile, whitelistNames);
-            if(whitelistNames.find("//") == string::npos)
-            {
-                    SplitStringIntoVector(whitelistNames, ',', configuration.whitelist);
-            }
-        }
-        else if(configOption == "Blacklist")
-        {
-            string blacklistNames;
-            getline(configFile, blacklistNames);
-            if(blacklistNames.find("//") == string::npos)
-            {
-                    SplitStringIntoVector(blacklistNames, ',', configuration.blacklist);
-            }
-        }
-        else if(configOption == "Series")
-        {
-            configFile >> configuration.seriesMode;
-        }
-	}
-    configFile.close();
-}
 
 void ReadFileIntoVector(string filename, vector<string>& fileHolder)
 {
@@ -224,13 +109,13 @@ string GetVideoSeries(string fullVideoPath, string seriesLocation)
 {
     string videoSeries = fullVideoPath;
     videoSeries.erase(0, seriesLocation.size());
-    videoSeries.erase(videoSeries.rend(), std::find_if(videoSeries.rend(), videoSeries.rbegin(), std::bind1st(std::not_equal_to<char>(), '/')));
+    //videoSeries.erase(videoSeries.rend(), std::find_if(videoSeries.rend(), videoSeries.rbegin(), std::bind1st(std::not_equal_to<char>(), '/')));
     return videoSeries;
 }
 
 void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation)
 {
-    vector<vector<string>> allVideoSeries;
+    vector< vector<string> > allVideoSeries;
     string lastSeries;
     int videoIndex = 0;
     while(videoIndex < videoContainer.size())
@@ -249,8 +134,7 @@ void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation
 
 int main()
 {        
-    config configuration;
-    ReadConfigFile(configuration);
+    RandomizerConfiguration configuration;
     
     vector<string> movies;
     vector<string> shows;
