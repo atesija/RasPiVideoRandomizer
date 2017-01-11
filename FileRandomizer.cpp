@@ -7,10 +7,14 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
 
 #include "RandomizerConfiguration.h"
 
-using namespace std;
+using std::stringstream;
+using std::ifstream;
+using std::ofstream;
+using std::string;
 
 const string MOVIE_FILENAME = "movies.txt";
 const string SHOWS_FILENAME = "shows.txt";
@@ -43,7 +47,7 @@ void OutputVideosToFile(vector<string>& videosFrom, int numberOfVideos, ofstream
     {
         if(!videosFrom.empty())
         {
-            outputFile << videosFrom.back() << endl;
+            outputFile << videosFrom.back() << std::endl;
             videosFrom.pop_back();
         }
     }
@@ -122,7 +126,7 @@ void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation
     {
         vector<string> videoSeries;
 
-        cout << GetVideoSeries(videoContainer[videoIndex], seriesLocation);
+        std::cout << GetVideoSeries(videoContainer[videoIndex], seriesLocation);
 
         if(!videoSeries.empty())
         {
