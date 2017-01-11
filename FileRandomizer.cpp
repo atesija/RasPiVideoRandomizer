@@ -113,7 +113,9 @@ string GetVideoSeries(string fullVideoPath, string seriesLocation)
 {
     string videoSeries = fullVideoPath;
     videoSeries.erase(0, seriesLocation.size());
-    //videoSeries.erase(videoSeries.rend(), std::find_if(videoSeries.rend(), videoSeries.rbegin(), std::bind1st(std::not_equal_to<char>(), '/')));
+	stringstream clippedVideoPath(videoSeries);
+	getline(clippedVideoPath, videoSeries, '/');
+
     return videoSeries;
 }
 
