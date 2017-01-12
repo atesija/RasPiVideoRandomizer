@@ -30,7 +30,7 @@ void ReadFileIntoVector(string filename, vector<string>& fileHolder)
 	string videoFile;
 	while (getline(videoFileInput, videoFile)) 
 	{
-		fileHolder.insert(fileHolder.begin(), videoFile);
+		fileHolder.push_back(videoFile);
 	}
 
 	videoFileInput.close();
@@ -47,8 +47,8 @@ void OutputVideosToFile(vector<string>& videosFrom, int numberOfVideos, ofstream
     {
         if(!videosFrom.empty())
         {
-            outputFile << videosFrom.back() << std::endl;
-            videosFrom.pop_back();
+            outputFile << videosFrom.front() << std::endl;
+            videosFrom.erase(videosFrom.begin());
         }
     }
 }
@@ -61,7 +61,7 @@ int GetRandomNumberBetween(int min, int max)
         return 0;
     }
     
-    return (rand() % (max - min)) + min;
+    return (rand() % (max + 1 - min)) + min;
 }
 
 void WhitelistVideos(vector<string>& whitelist, vector<string>& videos)
@@ -132,6 +132,9 @@ string GetVideoSeries(string fullVideoPath, string seriesLocation)
 
 void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation)
 {
+    //Lets make sure everything is in order
+    std::sort(videoContainer.begin(), videoContainer.end());
+
     //Lets get all the videos in vectors based on their series
     vector< vector<string> > allVideoSeries;
     string lastSeries;
@@ -141,6 +144,7 @@ void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation
         vector<string> videoSeries;
         
         lastSeries = GetVideoSeries(videoContainer[videoIndex], seriesLocation);
+        
         while(videoIndex < videoContainer.size() && lastSeries == GetVideoSeries(videoContainer[videoIndex], seriesLocation))
         {
             videoSeries.push_back(videoContainer[videoIndex]);

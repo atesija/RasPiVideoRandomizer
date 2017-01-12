@@ -56,7 +56,6 @@ RandomizerConfiguration::RandomizerConfiguration()
         else if(configOption == "MaxBumps")
         {
             configFile >> maxBumps;
-            maxBumps++;
         }
         else if(configOption == "MinShows")
         {
@@ -65,7 +64,6 @@ RandomizerConfiguration::RandomizerConfiguration()
         else if(configOption == "MaxShows")
         {
             configFile >> maxShows;
-            maxShows++;
         }
         else if(configOption == "Whitelist")
         {
