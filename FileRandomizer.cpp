@@ -53,8 +53,14 @@ void OutputVideosToFile(vector<string>& videosFrom, int numberOfVideos, ofstream
     }
 }
 
+//Random number between min and max inclusive
 int GetRandomNumberBetween(int min, int max)
 {
+    if(max - min == 0)
+    {
+        return 0;
+    }
+    
     return (rand() % (max - min)) + min;
 }
 
@@ -113,6 +119,11 @@ string GetVideoSeries(string fullVideoPath, string seriesLocation)
 {
     string videoSeries = fullVideoPath;
     videoSeries.erase(0, seriesLocation.size());
+	if(videoSeries[0] == '/')
+	{
+	    //Remove leading directory slash if there is one
+        videoSeries.erase(0, 1);
+	}
 	stringstream clippedVideoPath(videoSeries);
 	getline(clippedVideoPath, videoSeries, '/');
 
@@ -121,20 +132,41 @@ string GetVideoSeries(string fullVideoPath, string seriesLocation)
 
 void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation)
 {
+    //Lets get all the videos in vectors based on their series
     vector< vector<string> > allVideoSeries;
     string lastSeries;
     int videoIndex = 0;
     while(videoIndex < videoContainer.size())
     {
         vector<string> videoSeries;
-
-        std::cout << GetVideoSeries(videoContainer[videoIndex], seriesLocation);
+        
+        lastSeries = GetVideoSeries(videoContainer[videoIndex], seriesLocation);
+        while(videoIndex < videoContainer.size() && lastSeries == GetVideoSeries(videoContainer[videoIndex], seriesLocation))
+        {
+            videoSeries.push_back(videoContainer[videoIndex]);
+            videoIndex++;
+        }
 
         if(!videoSeries.empty())
         {
             allVideoSeries.push_back(videoSeries);
         }
-        ++videoIndex;
+    }
+    
+    //Now that we have all the videos sorted into series we can pull them out in order by series and randomly between series
+    videoContainer.clear();
+    while(!allVideoSeries.empty())
+    {
+        int seriesIndex = GetRandomNumberBetween(0, allVideoSeries.size() - 1);
+        vector<string>* selectedSeries = &allVideoSeries[seriesIndex];
+        
+        videoContainer.push_back(selectedSeries->front());
+        
+        selectedSeries->erase(selectedSeries->begin());
+        if(selectedSeries->empty())
+        {
+            allVideoSeries.erase(allVideoSeries.begin() + seriesIndex);
+        }
     }
 }
 
@@ -157,7 +189,7 @@ int main()
     BlacklistVideos(configuration.blacklist, shows);
     BlacklistVideos(configuration.blacklist, movies);
 
-	srand(time(NULL));
+    srand(time(NULL));
 
     if(configuration.seriesMode)
     {
