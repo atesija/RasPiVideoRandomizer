@@ -9,7 +9,7 @@
 using std::stringstream;
 using std::ifstream;
 
-const string CONFIG_FILENAME = "FileRandomizer.config";
+const string CONFIG_FILENAME = "Configuration.config";
 
 RandomizerConfiguration::RandomizerConfiguration()
 {
