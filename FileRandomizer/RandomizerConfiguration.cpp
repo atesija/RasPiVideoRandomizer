@@ -9,11 +9,9 @@
 using std::stringstream;
 using std::ifstream;
 
-const string CONFIG_FILENAME = "Configuration.config";
-
-RandomizerConfiguration::RandomizerConfiguration()
+RandomizerConfiguration::RandomizerConfiguration(char* configurationFilepath)
 {
-    ifstream configFile(CONFIG_FILENAME.c_str());
+    ifstream configFile(configurationFilepath);
 	string configOption;
 	while (getline(configFile, configOption)) 
 	{

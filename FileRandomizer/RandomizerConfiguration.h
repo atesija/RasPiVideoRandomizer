@@ -25,7 +25,7 @@ public:
     vector<string> blacklist;
     bool seriesMode;
 
-    RandomizerConfiguration();
+    RandomizerConfiguration(char* configurationFilepath);
 
 private:
 	void SplitStringIntoVector(string stringToSplit, char separator, vector<string>& outputStringList);

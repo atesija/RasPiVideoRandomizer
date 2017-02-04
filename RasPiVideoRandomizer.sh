@@ -17,6 +17,9 @@ BUMPS="/media/pi/Windfish/Extras"
 #Video player (You may need to change this if you don't have omxplayer installed. It is installed on Raspbian by default)
 VIDEOPLAYER="omxplayer"
 
+#Configuration file with all options for these scripts
+CONFIGURATION="Configuration.config"
+
 #Keeps track of the last played file so you can continue where you left off
 POSITIONTRACKERFILENAME="PlaybackPosition.info"
 
@@ -28,19 +31,19 @@ fi
 
 if [ "$CONTINUE" = "false"  ]; then
     #Get all videos in the directories with filetype mp4, mkv, avi, ogm, and mov
-    find "$MOVIES" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > movies.txt
-    find "$SHOWS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > shows.txt
-    find "$INTROS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > intros.txt
-    find "$BUMPS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > bumps.txt
+    find "$MOVIES" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > "movies.txt"
+    find "$SHOWS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > "shows.txt"
+    find "$INTROS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > "intros.txt"
+    find "$BUMPS" -name '*.mp4' -or -name '*.mkv' -or -name '*.avi' -or -name '*.ogm' -or -name '*.mov' > "bumps.txt"
 
     #Check if the file randomizer exists, if not build it
-    if [ ! -f FileRandomizer ]; then
-        g++ FileRandomizer.cpp RandomizerConfiguration.h -o FileRandomizer
+    if [ ! -f "FileRandomizer/FileRandomizer" ]; then
+        g++ FileRandomizer/FileRandomizer.cpp FileRandomizer/RandomizerConfiguration.cpp -o FileRandomizer/FileRandomizer
     fi
 
     #Run custom c++ script to randomize the videos
     #Outputs the file videos.txt which is read in the loop below
-    ./FileRandomizer
+    ./FileRandomizer/FileRandomizer "$(realpath $CONFIGURATION)"
     
     #Clear out the last played file
     echo 0 > "$POSITIONTRACKERFILENAME"

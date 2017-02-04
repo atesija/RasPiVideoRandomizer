@@ -174,9 +174,9 @@ void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation
     }
 }
 
-int main()
-{        
-    RandomizerConfiguration configuration;
+int main(int argc, char** argv)
+{
+    RandomizerConfiguration configuration(argv[1]);
     
     vector<string> movies;
     vector<string> shows;
