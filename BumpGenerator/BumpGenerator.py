@@ -64,6 +64,7 @@ for bump_part in bump_json["bumpTemplate"]:
 
 #Display the logo at the end 
 logo = pygame.image.load("Logo.png")
+logo = pygame.transform.scale(logo, (int(screen_width / 3.5), int(screen_height / 3.5)))
 logorect = logo.get_rect(center = (screen_width / 2, screen_height / 2))
 screen.fill(black)
 screen.blit(logo, logorect)
