@@ -1,0 +1,56 @@
+{
+    "bumpTemplate": 
+    [
+        {
+            "text": "Knock knock",
+            "time": "2.5"
+        },
+        {
+            "text": "#who",
+            "time": "2"
+        },
+        {
+            "text": "#firstpart",
+            "time": "2.5"
+        },
+        {
+            "text": "#response",
+            "time": "2"
+        },
+        {
+            "text": "#secondpart",
+            "time": "2.7"
+        }
+    ],
+    
+    "replacements": 
+    {
+        "#who":
+        [
+            "Who's there?",
+            "Who is it?"
+        ]
+    },
+    
+    "orderedReplacements": 
+    {
+        "#firstpart":
+        [
+            "Orange",
+            "Who",
+            "Ya"
+        ],
+        "#secondpart":
+        [
+            "Orange ya glad I didn't say banana?",
+            "You sound like an owl",
+            "I'm glad you're excited, but will you let me in?"
+        ],
+        "#response":
+        [
+            "Orange who?",
+            "Who who?",
+            "Ya who?"
+        ]
+    }
+}

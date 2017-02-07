@@ -1,0 +1,37 @@
+{
+    "bumpTemplate": 
+    [
+        {
+            "text": "#firstpart",
+            "time": "5"
+        },
+        {
+            "text": "#secondpart",
+            "time": "4"
+        }
+    ],
+    
+    "replacements": 
+    {
+    },
+    
+    "orderedReplacements": 
+    {
+        "#firstpart":
+        [
+            "What kind of line do you use to catch a boxing fish?",
+            "Want to hear a joke about paper?"
+        ],
+        "#secondpart":
+        [
+            "Punchline",
+            "Nevermind, it's terrible"
+        ],
+        "#response":
+        [
+            "Orange who?",
+            "Who who?",
+            "You who?"
+        ]
+    }
+}
