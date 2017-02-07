@@ -16,7 +16,10 @@ screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
 screen_width = pygame.display.Info().current_w
 screen_height = pygame.display.Info().current_h
 
-song = "/media/pi/Windfish/Music/Animal Crossing/Animal Crossing (GC Rip)/75 Rainy Day.mp3"
+#Open a random music file and play it
+random.seed()
+song = random.choice(open("music.txt").readlines())
+song = song.rstrip()
 pygame.mixer.init()
 pygame.mixer.music.load(song)
 pygame.mixer.music.play()
@@ -25,7 +28,6 @@ pygame.mixer.music.play()
 bump_template_list = glob.glob("BumpTemplates/*.json")
 
 #Choose a random template and open it
-random.seed()
 bump_file = random.choice(bump_template_list)
 bump_json = None
 with open(bump_file) as json_file:
