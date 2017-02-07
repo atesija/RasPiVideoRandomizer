@@ -1,0 +1,89 @@
+{
+    "bumpTemplate": 
+    [
+        {
+            "text": "What's my favorite animal?",
+            "time": "3"
+        },
+        {
+            "text": "#animal, for sure",
+            "time": "2.8"
+        },
+        {
+            "text": "I really like how #size and #adjective they are",
+            "time": "3"
+        },
+        {
+            "text": "Plus they're really #adjective when they #action",
+            "time": "3"
+        }
+    ],
+    
+    "replacements": 
+    {
+        "#animal":
+        [
+            "Tigers",
+            "Spiders",
+            "Eggplants",
+            "Cats",
+            "Dogs",
+            "Walrus",
+            "Bugs",
+            "Humans",
+            "Gorillas",
+            "Lizards",
+            "Cows",
+            "Jellyfish",
+            "Crows",
+            "Wolves",
+            "Parrots"
+        ],
+        "#adjective":
+        [
+            "cute",
+            "ugly",
+            "fat",
+            "stupid",
+            "burly",
+            "wet",
+            "slippery",
+            "creamy",
+            "silly",
+            "gross",
+            "bloated",
+            "humble"
+        ],
+        "#size":
+        [
+            "gigantic",
+            "tiny",
+            "massive",
+            "enormous",
+            "huge",
+            "small",
+            "normal",
+            "average",
+            "miniscule",
+            "well portioned"
+        ],
+        "#action":
+        [
+            "squawk",
+            "meow",
+            "bark",
+            "slither",
+            "sneeze",
+            "jump",
+            "speak",
+            "do your homework",
+            "eat your homework",
+            "fart",
+            "poop"
+        ]
+    },
+    
+    "orderedReplacements": 
+    {
+    }
+}
