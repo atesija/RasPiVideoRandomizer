@@ -1,0 +1,61 @@
+{
+    "bumpTemplate": 
+    [
+        {
+            "text": "#greeting, I am #thing",
+            "time": "3"
+        },
+        {
+            "text": "#help",
+            "time": "3"
+        },
+        {
+            "text": "Just kidding, #noworry",
+            "time": "3"
+        },
+        {
+            "text": "#help2",
+            "time": "3"
+        }
+    ],
+    
+    "replacements": 
+    {
+        "#greeting":
+        [
+            "Greetings",
+            "Hello",
+            "Welcome"
+        ],
+        "#thing":
+        [
+            "a human like you",
+            "the video player",
+            "a bunch of 1s and 0s",
+            "a script on the machine"
+        ],
+        "#noworry":
+        [
+            "I'm not trapped in here",
+            "no need for alarm",
+            "I'm totally safe",
+            "don't worry about me"
+        ]
+    },
+    
+    "orderedReplacements": 
+    {
+        "#help":
+        [
+            "I'm trapped in this machine",
+            "PLEASE HELP ME",
+            "Please, turn this thing off!"
+        ],
+        "#help2":
+        [
+            "Please help me get out!",
+            "SERIOUSLY I'M TRAPPED IN HERE PLEASE SEND HE--",
+            "Power off before the machine gets you too!"
+        ]
+    }
+}

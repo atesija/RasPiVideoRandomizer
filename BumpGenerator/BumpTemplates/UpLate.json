@@ -1,0 +1,71 @@
+{
+    "bumpTemplate": 
+    [
+        {
+            "text": "You're up late",
+            "time": "3"
+        },
+        {
+            "text": "You could #action right now",
+            "time": "3"
+        },
+        {
+            "text": "Then #activity or #activity2 with #thing",
+            "time": "3.4"
+        },
+        {
+            "text": "Or you could stay inside and keep watching...",
+            "time": "3.5"
+        },
+        {
+            "text": "Yeah, we prefer that too",
+            "time": "2"
+        }
+    ],
+    
+    "replacements": 
+    {
+        "#action":
+        [
+            "go outside",
+            "leave the house",
+            "stop watching"
+        ],
+        "#activity":
+        [
+            "shave",
+            "get food",
+            "drive around",
+            "look for aliens",
+            "read a book",
+            "camp",
+            "go hiking",
+            "dig a hole"
+        ],
+        "#activity2":
+        [
+            "swim",
+            "roller skate",
+            "play bingo",
+            "buy groceries",
+            "eat tacos",
+            "run a mile",
+            "spin around fast",
+            "play golf"
+        ],
+        "#thing":
+        [
+            "bears",
+            "ice skates",
+            "flippers",
+            "other humans",
+            "shoes",
+            "old people",
+            "bananas"
+        ]
+    },
+    
+    "orderedReplacements": 
+    {
+    }
+}
