@@ -14,6 +14,10 @@ INTROS="/media/pi/Windfish/Intros"
 #These are bumps/promos that may play between each show
 BUMPS="/media/pi/Windfish/Extras"
 
+#These are songs that can play if you have the bump generator turned on
+MUSIC="/media/pi/Windfish/Music"
+find "$MUSIC" -name '*.mp3' > "BumpGenerator/music.txt"
+
 #Video player (You may need to change this if you don't have omxplayer installed. It is installed on Raspbian by default)
 VIDEOPLAYER="omxplayer"
 
@@ -64,10 +68,17 @@ echo "$VIDEOSTOPLAY" | while IFS= read -r videofile
 do
     echo -Playing "$videofile"
 
-    #Play the video in another terminal to allow hotkeys to work with the player
-    lxterminal -e "$VIDEOPLAYER" -o hdmi -b "$videofile"
-    sleep 1;
-
+    if [ ! -f "$videofile" ]; then
+        #If the video file doesn't exist or we find "[GENERATEBUMP]" then we will generate a bump
+        cd BumpGenerator
+        python2.7 BumpGenerator.py
+        cd ../
+    else
+        #Play the video in another terminal to allow hotkeys to work with the player
+        lxterminal -e "$VIDEOPLAYER" -o hdmi -b "$videofile"
+        sleep 1;
+    fi
+    
     #Stay in this loop while VIDEOPLAYER is still running. Check every second
     while ps ax | grep -v grep | grep $VIDEOPLAYER > /dev/null
     do

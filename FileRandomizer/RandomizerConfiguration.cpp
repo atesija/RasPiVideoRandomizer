@@ -85,6 +85,10 @@ RandomizerConfiguration::RandomizerConfiguration(char* configurationFilepath)
         {
             configFile >> seriesMode;
         }
+        else if(configOption == "CustomBumpsPercent")
+        {
+            configFile >> customBumpsPercent;
+        }
 	}
     configFile.close();
 }

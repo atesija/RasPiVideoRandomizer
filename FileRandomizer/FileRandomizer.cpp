@@ -174,6 +174,24 @@ void ShuffleVideosInSeries(vector<string>& videoContainer, string seriesLocation
     }
 }
 
+//Wrapper in case we want the player to generate its own bumps
+void OutputBump(vector<string>& bumpsFrom, RandomizerConfiguration& configuration, ofstream& outputFile)
+{
+    if(!configuration.playBumps)
+    {
+        return;
+    }
+    
+    if(GetRandomNumberBetween(1, 100) <= configuration.customBumpsPercent)
+    {
+        outputFile << "[GENERATEBUMP]" << std::endl;
+    }
+    else
+    {
+        OutputVideosToFile(bumpsFrom, GetRandomNumberBetween(configuration.minBumps, configuration.maxBumps), outputFile);
+    }
+}
+
 int main(int argc, char** argv)
 {
     RandomizerConfiguration configuration(argv[1]);
@@ -222,20 +240,14 @@ int main(int argc, char** argv)
             for(int i = 0; i < numberOfShows; ++i)
             {
                 OutputVideosToFile(shows, 1, videoFileOutput);
-                if(configuration.playBumps)
-                {
-                    OutputVideosToFile(bumps, GetRandomNumberBetween(configuration.minBumps, configuration.maxBumps), videoFileOutput);
-                }
+                OutputBump(bumps, configuration, videoFileOutput);
             }
         }
 
         if(configuration.playMovies)
         {
             OutputVideosToFile(movies, 1, videoFileOutput);
-            if(configuration.playBumps)
-            {
-                OutputVideosToFile(bumps, GetRandomNumberBetween(configuration.minBumps, configuration.maxBumps), videoFileOutput);
-            }
+            OutputBump(bumps, configuration, videoFileOutput);
         }
 	}
 

@@ -24,6 +24,7 @@ public:
     vector<string> whitelist;
     vector<string> blacklist;
     bool seriesMode;
+    int customBumpsPercent;
 
     RandomizerConfiguration(char* configurationFilepath);
 
