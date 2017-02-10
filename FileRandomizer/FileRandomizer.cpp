@@ -192,8 +192,28 @@ void OutputBump(vector<string>& bumpsFrom, RandomizerConfiguration& configuratio
     }
 }
 
+void BasicRandomizer()
+{
+    vector<string> shows;
+    ReadFileIntoVector(SHOWS_FILENAME, shows);
+    srand(time(NULL));
+    ShuffleVideos(shows);
+	ofstream videoFileOutput(VIDEO_OUTPUT_FILENAME.c_str());
+	while(!shows.empty())
+	{
+        OutputVideosToFile(shows, 1, videoFileOutput);
+	}
+	videoFileOutput.close();
+}
+
 int main(int argc, char** argv)
 {
+    if(string(argv[1]) == "Basic")
+    {
+        BasicRandomizer();
+        return 0;
+    }
+    
     RandomizerConfiguration configuration(argv[1]);
     
     vector<string> movies;
