@@ -20,12 +20,18 @@
         "#firstpart":
         [
             "What kind of line do you use to catch a boxing fish?",
-            "Want to hear a joke about paper?"
+            "Want to hear a joke about paper?",
+            "What did the chicken say when it crossed the road?,
+            "What do you call a rhino combined with an elephant?",
+            "What do you call a rhino combined with an elephant?"
         ],
         "#secondpart":
         [
             "Punchline",
-            "Nevermind, it's terrible"
+            "Nevermind, it's terrible",
+            "To get to the other side",
+            "I don't know, it's irrelephant",
+            "elephino!"
         ],
         "#response":
         [

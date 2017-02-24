@@ -37,7 +37,12 @@
             "Jellyfish",
             "Crows",
             "Wolves",
-            "Parrots"
+            "Parrots",
+            "Penguins",
+            "Amoebas",
+            "Giraffes",
+            "Birds",
+            "Eggs"
         ],
         "#adjective":
         [
@@ -52,7 +57,9 @@
             "silly",
             "gross",
             "bloated",
-            "humble"
+            "humble",
+            "brown",
+            "purple"
         ],
         "#size":
         [
@@ -79,7 +86,11 @@
             "do your homework",
             "eat your homework",
             "fart",
-            "poop"
+            "poop",
+            "yelp",
+            "sleep",
+            "snore",
+            "climb"
         ]
     },
     

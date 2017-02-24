@@ -47,15 +47,13 @@
     {
         "#help":
         [
-            "I'm trapped in this machine",
-            "PLEASE HELP ME",
-            "Please, turn this thing off!"
+            "My job is to entertain you",
+            "PLEASE HELP ME"
         ],
         "#help2":
         [
-            "Please help me get out!",
-            "SERIOUSLY I'M TRAPPED IN HERE PLEASE SEND HE--",
-            "Power off before the machine gets you too!"
+            "Please enjoy these shows",
+            "SERIOUSLY I'M TRAPPED IN HERE PLEASE SEND HE--"
         ]
     }
 }

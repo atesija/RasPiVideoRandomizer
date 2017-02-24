@@ -40,7 +40,10 @@
             "read a book",
             "camp",
             "go hiking",
-            "dig a hole"
+            "dig a hole",
+            "mow the lawn",
+            "kick a ball",
+            "look at the stars"
         ],
         "#activity2":
         [
@@ -51,7 +54,9 @@
             "eat tacos",
             "run a mile",
             "spin around fast",
-            "play golf"
+            "play golf",
+            "sleep",
+            "grill meat"
         ],
         "#thing":
         [
@@ -61,7 +66,10 @@
             "other humans",
             "shoes",
             "old people",
-            "bananas"
+            "bananas",
+            "cakes",
+            "boxes",
+            "your friends"
         ]
     },
     
