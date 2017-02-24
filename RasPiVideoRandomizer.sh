@@ -6,16 +6,16 @@ setterm -cursor off
 
 #Set the path to the directories containing your videos
 #These are full-length movies
-MOVIES="/media/pi/Windfish/Videos/Movies"
+MOVIES="/media/pi/WindFish/Videos/Movies"
 #These are shows or series
-SHOWS="/media/pi/Windfish/Videos/Series"
+SHOWS="/media/pi/WindFish/Videos/Series"
 #These are intros/openings that will play once initially
-INTROS="/media/pi/Windfish/Intros"
+INTROS="/media/pi/WindFish/Intros"
 #These are bumps/promos that may play between each show
-BUMPS="/media/pi/Windfish/Extras"
+BUMPS="/media/pi/WindFish/Extras"
 
 #These are songs that can play if you have the bump generator turned on
-MUSIC="/media/pi/Windfish/Music"
+MUSIC="/media/pi/WindFish/Music"
 find "$MUSIC" -name '*.mp3' > "BumpGenerator/music.txt"
 
 #Video player (You may need to change this if you don't have omxplayer installed. It is installed on Raspbian by default)
@@ -75,7 +75,7 @@ do
         cd ../
     else
         #Play the video in another terminal to allow hotkeys to work with the player
-        lxterminal -e "$VIDEOPLAYER" -o hdmi -b "$videofile"
+        lxterminal -e "$VIDEOPLAYER" -o hdmi -b "$videofile" --font-size 40
         sleep 1;
     fi
     
