@@ -13,7 +13,7 @@ def BlacklistVideos(video_list, blacklist_strings):
     return [video for video in video_list if not VideoContainsString(video, blacklist_strings)]
 
 def FileIsVideo(filename):
-    video_file_endings = [".mp4", ".avi", ".mkv", ".mov"]
+    video_file_endings = [".mp4", ".avi", ".mkv", ".mov", ".ogm"]
     return any(video_file in filename for video_file in video_file_endings)
 
 def GetVideosFromLocation(folder_path):
