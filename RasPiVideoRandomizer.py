@@ -19,18 +19,11 @@ def FileIsVideo(filename):
 def GetVideosFromLocation(folder_path):
     videos = []
     for root, dirs, files in os.walk(folder_path):
-        videos.extend([f for f in files if FileIsVideo(f)])
+        videos.extend([os.path.join(root, f) for f in files if FileIsVideo(f)])
     return videos
 
-allimages = []
-for root, dirs, files in os.walk("C:/Users/a.tesija/Desktop"):
-    images = [f for f in files if ".mp4" in f]
-    allimages.extend(images)
-print allimages
-random.shuffle(allimages)
-print allimages
-print VideoContainsString(allimages[0], "ios")
-print BlacklistVideos(allimages, ["ois", 'ios'])
-print FileIsVideo("hi.png")
-print FileIsVideo(allimages[0])
-print GetVideosFromLocation("C:/Users/a.tesija/Desktop")
+def RandomizeVideos(video_list):
+    random.shuffle(video_list)
+
+    
+print GetVideosFromLocation("/media/pi/WindFish/Videos/Shows")
