@@ -35,7 +35,7 @@ def is_video_order_template_key(order_key):
         return True
 
     for special_key in special_keys:
-        if order_key in special_key:
+        if special_key in order_key:
             return True
 
     return False
