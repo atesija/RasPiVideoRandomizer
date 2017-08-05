@@ -40,4 +40,10 @@ def BuildOrderVideoOrder(order_template):
             video_order.append(option)
     return video_order
     
+def PlayVideo(video_file):
+    pass
+
+def IsVideoPlaying():
+    return false
+
 print GetVideosFromLocation("/media/pi/WindFish/Videos/Shows")
