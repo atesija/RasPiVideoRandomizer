@@ -3,29 +3,29 @@ import os
 import re
 import random
 
-def VideoContainsString(video_filename, strings):
+def video_contains_string(video_filename, strings):
     return any(string in video_filename for string in strings)
     
-def WhitelistVideos(video_list, whitelist_strings):
-    return [video for video in video_list if VideoContainsString(video, whitelist_strings)]
+def whitelist_videos(video_list, whitelist_strings):
+    return [video for video in video_list if video_contains_string(video, whitelist_strings)]
     
-def BlacklistVideos(video_list, blacklist_strings):
-    return [video for video in video_list if not VideoContainsString(video, blacklist_strings)]
+def blacklist_videos(video_list, blacklist_strings):
+    return [video for video in video_list if not video_contains_string(video, blacklist_strings)]
 
-def FileIsVideo(filename):
+def file_is_video(filename):
     video_file_endings = [".mp4", ".avi", ".mkv", ".mov", ".ogm"]
     return any(video_file in filename for video_file in video_file_endings)
 
-def GetVideosFromLocation(folder_path):
+def get_videos_from_location(folder_path):
     videos = []
     for root, dirs, files in os.walk(folder_path):
-        videos.extend([os.path.join(root, f) for f in files if FileIsVideo(f)])
+        videos.extend([os.path.join(root, f) for f in files if file_is_video(f)])
     return videos
 
-def RandomizeVideos(video_list):
+def randomize_videos(video_list):
     random.shuffle(video_list)
 
-def BuildOrderVideoOrder(order_template):
+def build_order_video_order(order_template):
     video_order = []
     for option in order_template:
         if("repeat" in option):
