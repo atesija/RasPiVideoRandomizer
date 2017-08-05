@@ -49,13 +49,13 @@ def build_video_order(order_template):
             print "Special options that follow normal options are: " + ', '.join(special_keys)
             continue
 
-        if("repeat" in option):
+        if "repeat" in option:
             repeat_amount = [int(s) for s in option.split() if s.isdigit()]
             for _ in range(random.randint(repeat_amount[0], repeat_amount[1]) - 1):
                 video_order.append(video_order[-1])
-        elif("chance" in option):
+        elif "chance" in option:
             chance_to_stay = [int(s) for s in option.split() if s.isdigit()]
-            if(random.randint(0, 100) >= chance_to_stay[0]):
+            if random.randint(0, 100) >= chance_to_stay[0]:
                 del video_order[-1]
         else:
             video_order.append(option)
