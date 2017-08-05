@@ -51,14 +51,25 @@ def build_video_order(order_template):
 
         if "repeat" in option:
             repeat_amount = [int(s) for s in option.split() if s.isdigit()]
-            for _ in range(random.randint(repeat_amount[0], repeat_amount[1]) - 1):
-                video_order.append(video_order[-1])
+            if len(repeat_amount) is 1:
+                for _ in range(repeat_amount[0] - 1):
+                    video_order.append(video_order[-1])
+            elif len(repeat_amount) is 2:
+                for _ in range(random.randint(repeat_amount[0], repeat_amount[1]) - 1):
+                    video_order.append(video_order[-1])
+            else:
+                print option + " is not a well formed repeat option"
+                print "If one int follows it the previous option will be repeated that many times"
+                print "If two ints follow it the previous option will be repeated randomly between those two amounts of times inclusivly"
+
         elif "chance" in option:
             chance_to_stay = [int(s) for s in option.split() if s.isdigit()]
             if random.randint(0, 100) >= chance_to_stay[0]:
                 del video_order[-1]
+
         else:
             video_order.append(option)
+
     return video_order
     
 def PlayVideo(video_file):
