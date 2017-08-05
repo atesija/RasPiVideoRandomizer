@@ -25,5 +25,19 @@ def GetVideosFromLocation(folder_path):
 def RandomizeVideos(video_list):
     random.shuffle(video_list)
 
+def BuildOrderVideoOrder(order_template):
+    video_order = []
+    for option in order_template:
+        if("repeat" in option):
+            repeat_amount = [int(s) for s in option.split() if s.isdigit()]
+            for _ in range(random.randint(repeat_amount[0], repeat_amount[1]) - 1):
+                video_order.append(video_order[-1])
+        elif("chance" in option):
+            chance_to_stay = [int(s) for s in option.split() if s.isdigit()]
+            if(random.randint(0, 100) >= chance_to_stay[0]):
+                del video_order[-1]
+        else:
+            video_order.append(option)
+    return video_order
     
 print GetVideosFromLocation("/media/pi/WindFish/Videos/Shows")
