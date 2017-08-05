@@ -89,4 +89,16 @@ class RasPiVideoRandomizerTests(unittest.TestCase):
     	for video in video_list:
 			self.assertTrue(video in expected_videos)
 
+    def test__is_video_order_template_key__mispelled_key__false(self):
+        self.assertFalse(RasPiVideoRandomizer.is_video_order_template_key("movee"))
+
+    def test__is_video_order_template_key__key_doesnt_exist__false(self):
+        self.assertFalse(RasPiVideoRandomizer.is_video_order_template_key("music"))
+
+    def test__is_video_order_template_key__key_exists__true(self):
+        self.assertTrue(RasPiVideoRandomizer.is_video_order_template_key("show"))
+
+    def test__is_video_order_template_key__special_key_exists__true(self):
+        self.assertTrue(RasPiVideoRandomizer.is_video_order_template_key("chance"))
+
 unittest.main()
