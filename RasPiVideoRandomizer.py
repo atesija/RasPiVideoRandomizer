@@ -26,7 +26,6 @@ def randomize_videos(video_list):
     random.shuffle(video_list)
     return video_list
 
-def build_order_video_order(order_template):
 def is_video_order_template_key(order_key):
     order_keys = ["show", "bump", "commercial", "movie", "lineup", "intro"]
     if order_key in order_keys:
@@ -39,6 +38,7 @@ def is_video_order_template_key(order_key):
 
     return False
 
+def build_video_order(order_template):
     video_order = []
     for option in order_template:
         if("repeat" in option):
