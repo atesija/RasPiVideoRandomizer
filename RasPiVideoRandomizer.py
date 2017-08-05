@@ -3,6 +3,10 @@ import os
 import re
 import random
 
+#TODO: read these in from central location like json
+order_keys = ["show", "bump", "commercial", "movie", "lineup", "intro"]
+special_keys = ["repeat", "chance"]
+
 def video_contains_string(video_filename, strings):
     return any(string in video_filename for string in strings)
     
@@ -27,11 +31,9 @@ def randomize_videos(video_list):
     return video_list
 
 def is_video_order_template_key(order_key):
-    order_keys = ["show", "bump", "commercial", "movie", "lineup", "intro"]
     if order_key in order_keys:
         return True
 
-    special_keys = ["repeat", "chance"]
     for special_key in special_keys:
         if order_key in special_key:
             return True
@@ -41,6 +43,12 @@ def is_video_order_template_key(order_key):
 def build_video_order(order_template):
     video_order = []
     for option in order_template:
+        if not is_video_order_template_key(option):
+            print option + " is not a key for the video order template"
+            print "Options are: " + ', '.join(order_keys)
+            print "Special options that follow normal options are: " + ', '.join(special_keys)
+            continue
+
         if("repeat" in option):
             repeat_amount = [int(s) for s in option.split() if s.isdigit()]
             for _ in range(random.randint(repeat_amount[0], repeat_amount[1]) - 1):
