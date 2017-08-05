@@ -101,4 +101,24 @@ class RasPiVideoRandomizerTests(unittest.TestCase):
     def test__is_video_order_template_key__special_key_exists__true(self):
         self.assertTrue(RasPiVideoRandomizer.is_video_order_template_key("chance"))
 
+    def test__build_video_order__only_keys_in_template__order_is_those_keys(self):
+        video_template = ["intro", "lineup", "show", "commercial", "movie"]
+        expected_order = ["intro", "lineup", "show", "commercial", "movie"]
+        self.assertEqual(expected_order, RasPiVideoRandomizer.build_video_order(video_template))
+
+    def test__build_video_order__template_repeats_key_in_random_range__order_has_key_repeated(self):
+        video_template = ["show", "repeat 1 4"]
+        possible_expected_orders = [["show"], ["show", "show"], ["show", "show", "show"], ["show", "show", "show", "show"]]
+        self.assertTrue(RasPiVideoRandomizer.build_video_order(video_template) in possible_expected_orders)
+
+    def test__build_video_order__template_repeats_key_specific_amount__order_has_key_repeated(self):
+        video_template = ["show", "repeat 5"]
+        expected_order = ["show", "show", "show", "show", "show"]
+        self.assertEqual(expected_order, RasPiVideoRandomizer.build_video_order(video_template))
+
+    def test__build_video_order__template_key_chance_to_be_there__order_may_contain_key(self):
+        video_template = ["movie", "chance 20"]
+        possible_expected_orders = [[], ["movie"]]
+        self.assertTrue(RasPiVideoRandomizer.build_video_order(video_template) in possible_expected_orders)
+
 unittest.main()
