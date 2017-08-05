@@ -32,4 +32,16 @@ class RasPiVideoRandomizerTests(unittest.TestCase):
     def test__whitelist_videos__all_videos_match_whitelist_strings__video_in_list(self):
     	self.assertEqual(["Shin Chan", "Death Note", "Monster"], RasPiVideoRandomizer.whitelist_videos(["Shin Chan", "Death Note", "Monster"], ["Shin", "Death", "Monster"]))
 
+    def test__blacklist_videos__no_blacklist_strings__full_list(self):
+    	self.assertEqual(["Shin Chan", "Death Note", "Monster"], RasPiVideoRandomizer.blacklist_videos(["Shin Chan", "Death Note", "Monster"], []))
+
+    def test__blacklist_videos__no_matching_blacklist_strings__full_list(self):
+    	self.assertEqual(["Shin Chan", "Death Note", "Monster"], RasPiVideoRandomizer.blacklist_videos(["Shin Chan", "Death Note", "Monster"], ["Scooby", "Rick and Morty"]))
+
+    def test__blacklist_videos__one_video_matches_blacklist_strings__video_not_in_list(self):
+    	self.assertEqual(["Death Note", "Monster"], RasPiVideoRandomizer.blacklist_videos(["Shin Chan", "Death Note", "Monster"], ["Shin", "Scooby"]))
+
+    def test__blacklist_videos__all_videos_match_blacklist_strings__empty_list(self):
+    	self.assertEqual([], RasPiVideoRandomizer.blacklist_videos(["Shin Chan", "Death Note", "Monster"], ["Shin", "Death", "Monster"]))
+
 unittest.main()
