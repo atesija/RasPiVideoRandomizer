@@ -24,6 +24,7 @@ def get_videos_from_location(folder_path):
 
 def randomize_videos(video_list):
     random.shuffle(video_list)
+    return video_list
 
 def build_order_video_order(order_template):
     video_order = []

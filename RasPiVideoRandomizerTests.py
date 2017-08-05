@@ -77,4 +77,16 @@ class RasPiVideoRandomizerTests(unittest.TestCase):
 
     def test__file_is_video__txt_file__false(self):
         self.assertFalse(RasPiVideoRandomizer.file_is_video("Rick and Morty.txt"))
+
+    def test__randomize_videos__four_videos__same_size_list(self):
+    	video_list = ["Shin Chan", "Death Note", "Monster", "Rick and Morty"]
+    	self.assertEqual(4, len(RasPiVideoRandomizer.randomize_videos(video_list)))
+
+    def test__randomize_videos__four_videos__list_has_same_videos(self):
+    	video_list = ["Shin Chan", "Death Note", "Monster", "Rick and Morty"]
+    	expected_videos = ["Shin Chan", "Death Note", "Monster", "Rick and Morty"]
+    	RasPiVideoRandomizer.randomize_videos(video_list)
+    	for video in video_list:
+			self.assertTrue(video in expected_videos)
+
 unittest.main()
