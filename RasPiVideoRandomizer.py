@@ -45,6 +45,6 @@ def PlayVideo(video_file):
     pass
 
 def IsVideoPlaying():
-    return false
+    return False
 
 print GetVideosFromLocation("/media/pi/WindFish/Videos/Shows")
