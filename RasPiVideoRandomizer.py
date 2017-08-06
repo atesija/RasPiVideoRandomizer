@@ -2,6 +2,7 @@ import glob
 import os
 import re
 import random
+import json
 
 #TODO: read these in from central location like json
 order_keys = ["show", "bump", "commercial", "movie", "lineup", "intro"]
@@ -77,4 +78,9 @@ def PlayVideo(video_file):
 
 def IsVideoPlaying():
     return False
-    
+
+
+if __name__ == "__main__":
+    first_run = True;
+    configuration_json = json.load(open("Configuration.json"))
+    print configuration_json
