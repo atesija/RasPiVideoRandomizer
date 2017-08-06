@@ -3,18 +3,28 @@
     {
         "movies":
         [
+            "/media/pi/WindFish/Videos/Movies"
         ],
         "shows":
         [
+            "/media/pi/WindFish/Videos/Anime",
+            "/media/pi/WindFish/Videos/Shows"
         ],
         "intros":
         [
+            "/media/pi/WindFish/Intros"
         ],
         "bumps":
         [
+            "/media/pi/WindFish/Extras/CartoonCartoons",
+            "/media/pi/WindFish/Extras/ToonamiBumps",
+            "/media/pi/WindFish/Extras/GameReviews",
+            "/media/pi/WindFish/Extras/Speeches",
+            "/media/pi/WindFish/Extras/AdultSwimPromos"
         ],
         "commercials":
         [
+            "/media/pi/WindFish/Extras/Commercials"
         ]
     },
     
