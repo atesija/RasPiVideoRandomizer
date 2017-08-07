@@ -28,15 +28,6 @@
         ]
     },
     
-    "play media":
-    {
-        "movies": false,
-        "shows": true,
-        "intros": true,
-        "bumps": true,
-        "commercials": true
-    },
-    
     "startvideoorder":
     [
         "intro",
