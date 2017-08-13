@@ -29,6 +29,9 @@ def get_videos_from_location(folder_path):
         videos.extend([os.path.join(root, f) for f in files if file_is_video(f)])
     return videos
 
+def get_all_videos_from_folders(folders):
+    return [get_videos_from_location(folder) for folder in folders]
+
 def randomize_videos(video_list):
     random.shuffle(video_list)
     return video_list
