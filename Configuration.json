@@ -3,28 +3,28 @@
     {
         "movies":
         [
-            "/media/pi/WindFish/Videos/Movies"
+            "/media/pi/Windfish/Videos/Movies"
         ],
         "shows":
         [
-            "/media/pi/WindFish/Videos/Anime",
-            "/media/pi/WindFish/Videos/Shows"
+            "/media/pi/Windfish/Videos/Anime",
+            "/media/pi/Windfish/Videos/Shows"
         ],
         "intros":
         [
-            "/media/pi/WindFish/Intros"
+            "/media/pi/Windfish/Intros"
         ],
         "bumps":
         [
-            "/media/pi/WindFish/Extras/CartoonCartoons",
-            "/media/pi/WindFish/Extras/ToonamiBumps",
-            "/media/pi/WindFish/Extras/GameReviews",
-            "/media/pi/WindFish/Extras/Speeches",
-            "/media/pi/WindFish/Extras/AdultSwimPromos"
+            "/media/pi/Windfish/Extras/CartoonCartoons",
+            "/media/pi/Windfish/Extras/ToonamiBumps",
+            "/media/pi/Windfish/Extras/GameReviews",
+            "/media/pi/Windfish/Extras/Speeches",
+            "/media/pi/Windfish/Extras/AdultSwimPromos"
         ],
         "commercials":
         [
-            "/media/pi/WindFish/Extras/Commercials"
+            "/media/pi/Windfish/Extras/Commercials"
         ]
     },
     
