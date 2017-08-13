@@ -3,6 +3,8 @@ import os
 import re
 import random
 import json
+from subprocess import Popen, PIPE
+from time import sleep
 
 #TODO: read these in from central location like json
 order_keys = ["show", "bump", "commercial", "movie", "lineup", "intro"]
@@ -73,10 +75,17 @@ def build_video_order(order_template):
 
     return video_order
     
-def PlayVideo(video_file):
-    pass
+def play_video(video_file):
+    print "Playing: " + video_file
+    player = Popen(["lxterminal", "-e", "omxplayer",  video_file, "-b", "-o", "hdmi"], stdout = PIPE, stderr = PIPE, stdin = PIPE)
+    player.communicate()
+    print "After: " + video_file
+    print player.pid
 
-def IsVideoPlaying():
+def is_video_playing():
+    for process in Popen(["ps", "ax"], stdout = PIPE).stdout:
+        if "omxplayer" in process:
+                return True
     return False
 
 
