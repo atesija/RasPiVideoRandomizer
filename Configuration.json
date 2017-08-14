@@ -7,8 +7,8 @@
         ],
         "shows":
         [
-            "/media/pi/Windfish/Videos/Anime",
-            "/media/pi/Windfish/Videos/Shows"
+            "/media/pi/Windfish/Videos/Shows",
+            "/media/pi/Windfish/Videos/Anime"
         ],
         "intros":
         [
@@ -16,15 +16,11 @@
         ],
         "bumps":
         [
-            "/media/pi/Windfish/Extras/CartoonCartoons",
-            "/media/pi/Windfish/Extras/ToonamiBumps",
-            "/media/pi/Windfish/Extras/GameReviews",
-            "/media/pi/Windfish/Extras/Speeches",
-            "/media/pi/Windfish/Extras/AdultSwimPromos"
+            "/media/pi/Windfish/Bumps"
         ],
         "commercials":
         [
-            "/media/pi/Windfish/Extras/Commercials"
+            "/media/pi/Windfish/Commercials"
         ]
     },
     

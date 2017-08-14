@@ -20,9 +20,10 @@ class RasPiVideoRandomizerTests(unittest.TestCase):
     def test__video_contains_string__matching_string_and_non_matching_string__true(self):
         self.assertTrue(RasPiVideoRandomizer.video_contains_string("Scooby Doo", ["Gundam", "Doo"]))
 
-    def test__whitelist_videos__no_whitelist_strings__empty_list(self):
+    def test__whitelist_videos__no_whitelist_strings__full_list(self):
     	video_list = ["Shin Chan", "Death Note", "Monster"]
-    	self.assertEqual([], RasPiVideoRandomizer.whitelist_videos(video_list, []))
+    	expected_videos = ["Shin Chan", "Death Note", "Monster"]
+    	self.assertEqual(expected_videos, RasPiVideoRandomizer.whitelist_videos(video_list, []))
 
     def test__whitelist_videos__no_matching_whitelist_strings__empty_list(self):
     	video_list = ["Shin Chan", "Death Note", "Monster"]
@@ -63,8 +64,8 @@ class RasPiVideoRandomizerTests(unittest.TestCase):
     def test__file_is_video__mp4_file__true(self):
         self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.mp4"))
 
-    def test__file_is_video__mov_file__true(self):
-        self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.mov"))
+    def test__file_is_video__flv_file__true(self):
+        self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.flv"))
 
     def test__file_is_video__avi_file__true(self):
         self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.avi"))

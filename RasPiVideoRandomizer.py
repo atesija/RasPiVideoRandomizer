@@ -14,13 +14,17 @@ def video_contains_string(video_filename, strings):
     return any(string in video_filename for string in strings)
     
 def whitelist_videos(video_list, whitelist_strings):
+    if not whitelist_strings:
+        return video_list
     return [video for video in video_list if video_contains_string(video, whitelist_strings)]
     
 def blacklist_videos(video_list, blacklist_strings):
+    if not blacklist_strings:
+        return video_list
     return [video for video in video_list if not video_contains_string(video, blacklist_strings)]
 
 def file_is_video(filename):
-    video_file_endings = [".mp4", ".avi", ".mkv", ".mov", ".ogm"]
+    video_file_endings = [".mp4", ".avi", ".mkv", ".flv", ".ogm"]
     return any(video_file in filename for video_file in video_file_endings)
 
 def get_videos_from_location(folder_path):
@@ -30,7 +34,7 @@ def get_videos_from_location(folder_path):
     return videos
 
 def get_all_videos_from_folders(folders):
-    return [get_videos_from_location(folder) for folder in folders]
+    return sum([get_videos_from_location(folder) for folder in folders], [])
 
 def randomize_videos(video_list):
     random.shuffle(video_list)
@@ -82,8 +86,6 @@ def play_video(video_file):
     print "Playing: " + video_file
     player = Popen(["lxterminal", "-e", "omxplayer",  video_file, "-b", "-o", "hdmi"], stdout = PIPE, stderr = PIPE, stdin = PIPE)
     player.communicate()
-    print "After: " + video_file
-    print player.pid
 
 def is_video_playing():
     for process in Popen(["ps", "ax"], stdout = PIPE).stdout:
@@ -93,6 +95,42 @@ def is_video_playing():
 
 
 if __name__ == "__main__":
-    first_run = True;
     configuration_json = json.load(open("Configuration.json"))
-    print configuration_json
+    
+    shows = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["shows"]))
+    movies = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["movies"]))
+    bumps = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["bumps"]))
+    commercials = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["commercials"]))
+    intros = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["intros"]))
+    
+    shows = whitelist_videos(shows, configuration_json["whitelist"])
+    movies = whitelist_videos(movies, configuration_json["whitelist"])
+
+    shows = blacklist_videos(shows, configuration_json["blacklist"])
+    movies = blacklist_videos(movies, configuration_json["blacklist"])
+
+    video_order = build_video_order(configuration_json["startvideoorder"])
+    video_order += build_video_order(configuration_json["loopvideoorder"])
+    
+    while True:
+        if not video_order:
+            video_order = build_video_order(configuration_json["loopvideoorder"])
+        next_video_type = video_order.pop(0)
+        
+        if next_video_type == "show":  
+            play_video(shows.pop())
+        elif next_video_type == "movie":
+            play_video(movies.pop())
+        elif next_video_type == "bump":
+            play_video(bumps.pop())
+        elif next_video_type == "commercial":
+            play_video(commercials.pop())
+        elif next_video_type == "intro":
+            play_video(intros.pop())
+        else:
+            print "unkown"          
+
+        sleep(1)
+        while is_video_playing() is True:
+            sleep(1)
+
