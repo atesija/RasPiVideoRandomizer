@@ -1,3 +1,4 @@
 FileRandomizer/FileRandomizer
 *.txt
 *.info
+*.pyc
