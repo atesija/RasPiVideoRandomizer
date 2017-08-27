@@ -3,6 +3,7 @@ import os
 import re
 import random
 import json
+from FileFinder import get_files_of_type_from_folders
 from subprocess import Popen, PIPE
 from time import sleep
 
@@ -22,19 +23,6 @@ def blacklist_videos(video_list, blacklist_strings):
     if not blacklist_strings:
         return video_list
     return [video for video in video_list if not video_contains_string(video, blacklist_strings)]
-
-def file_is_video(filename):
-    video_file_endings = [".mp4", ".avi", ".mkv", ".flv", ".ogm"]
-    return any(video_file in filename for video_file in video_file_endings)
-
-def get_videos_from_location(folder_path):
-    videos = []
-    for root, dirs, files in os.walk(folder_path):
-        videos.extend([os.path.join(root, f) for f in files if file_is_video(f)])
-    return videos
-
-def get_all_videos_from_folders(folders):
-    return sum([get_videos_from_location(folder) for folder in folders], [])
 
 def randomize_videos(video_list):
     random.shuffle(video_list)
@@ -97,11 +85,12 @@ def is_video_playing():
 if __name__ == "__main__":
     configuration_json = json.load(open("Configuration.json"))
     
-    shows = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["shows"]))
-    movies = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["movies"]))
-    bumps = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["bumps"]))
-    commercials = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["commercials"]))
-    intros = randomize_videos(get_all_videos_from_folders(configuration_json["folders"]["intros"]))
+    video_filetypes = [".mp4", ".avi", ".mkv", ".flv", ".ogm"]
+    shows = randomize_videos(get_files_of_type_from_folders(configuration_json["folders"]["shows"], video_filetypes))
+    movies = randomize_videos(get_files_of_type_from_folders(configuration_json["folders"]["movies"], video_filetypes))
+    bumps = randomize_videos(get_files_of_type_from_folders(configuration_json["folders"]["bumps"], video_filetypes))
+    commercials = randomize_videos(get_files_of_type_from_folders(configuration_json["folders"]["commercials"], video_filetypes))
+    intros = randomize_videos(get_files_of_type_from_folders(configuration_json["folders"]["intros"], video_filetypes))
     
     shows = whitelist_videos(shows, configuration_json["whitelist"])
     movies = whitelist_videos(movies, configuration_json["whitelist"])

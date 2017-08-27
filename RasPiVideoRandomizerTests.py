@@ -58,27 +58,6 @@ class RasPiVideoRandomizerTests(unittest.TestCase):
     	video_list = ["Shin Chan", "Death Note", "Monster"]
     	self.assertEqual([], RasPiVideoRandomizer.blacklist_videos(video_list, ["Shin", "Death", "Monster"]))
 
-    def test__file_is_video__empty_video_string__false(self):
-        self.assertFalse(RasPiVideoRandomizer.file_is_video(""))
-
-    def test__file_is_video__mp4_file__true(self):
-        self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.mp4"))
-
-    def test__file_is_video__flv_file__true(self):
-        self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.flv"))
-
-    def test__file_is_video__avi_file__true(self):
-        self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.avi"))
-
-    def test__file_is_video__mkv_file__true(self):
-        self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.mkv"))
-
-    def test__file_is_video__ogm_file__true(self):
-        self.assertTrue(RasPiVideoRandomizer.file_is_video("Rick and Morty.ogm"))
-
-    def test__file_is_video__txt_file__false(self):
-        self.assertFalse(RasPiVideoRandomizer.file_is_video("Rick and Morty.txt"))
-
     def test__randomize_videos__four_videos__same_size_list(self):
     	video_list = ["Shin Chan", "Death Note", "Monster", "Rick and Morty"]
     	self.assertEqual(4, len(RasPiVideoRandomizer.randomize_videos(video_list)))

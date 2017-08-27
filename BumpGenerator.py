@@ -4,6 +4,7 @@ import sys
 import glob
 import random
 import json
+import FileFinder
 
 pygame.init()
 
@@ -18,7 +19,8 @@ screen_height = pygame.display.Info().current_h
 
 #Open a random music file and play it
 random.seed()
-song = random.choice(open("music.txt").readlines())
+configuration_json = json.load(open("Configuration.json"))  
+song = random.choice(get_files_of_type_from_folders(configuration_json["folders"]["music"]), ".mp3")
 song = song.rstrip()
 pygame.mixer.init()
 pygame.mixer.music.load(song)
