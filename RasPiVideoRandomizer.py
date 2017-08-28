@@ -3,6 +3,7 @@ import os
 import re
 import random
 import json
+import BumpGenerator
 from FileFinder import get_files_of_type_from_folders
 from subprocess import Popen, PIPE
 from time import sleep
@@ -111,13 +112,16 @@ if __name__ == "__main__":
         elif next_video_type == "movie":
             play_video(movies.pop())
         elif next_video_type == "bump":
-            play_video(bumps.pop())
+            if random.randint(0, 1) == 0:
+                play_video(bumps.pop())
+            else:
+                BumpGenerator.play_bump()
         elif next_video_type == "commercial":
             play_video(commercials.pop())
         elif next_video_type == "intro":
             play_video(intros.pop())
         else:
-            print "unkown"          
+            print "unkown"        
 
         sleep(1)
         while is_video_playing() is True:
