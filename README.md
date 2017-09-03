@@ -1,7 +1,8 @@
-# Toonami Adult Swim Video Randomizer
-A video randomizer for the Raspberry Pi that plays shows and movies with Toonami and Adult Swim style bumps and promos in between (videos not included)
+# RasPi Randomizer
+A video randomizer for the Raspberry Pi that can play shows and movies with commercials or bumps in between.
+Requires pygame
 
-This project is not affiliated in any way with Toonami or Adult Swim.
+Modify Configuration.json to set the locations of your videos and the order they'll play in. To run it open up a terminal and navigate to the folder then run "python RasPiVideoRandomizer.py".
 
 [Toonami bumps and promos can be found here.](http://toonamiarsenal.com/)
 
