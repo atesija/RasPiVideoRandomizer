@@ -1,0 +1,49 @@
+{
+    "folders": 
+    {
+        "movies":
+        [
+        ],
+        "shows":
+        [
+        ],
+        "intros":
+        [
+        ],
+        "bumps":
+        [
+        ],
+        "commercials":
+        [
+        ],
+        "music":
+        [
+        ]
+    },
+    
+    "startVideoOrder":
+    [
+        "intro",
+        "lineup"
+    ],
+
+    "loopVideoOrder":
+    [
+        "show",
+        "commercial",
+        "repeat 1 3",
+        "bump",
+        "lineup",
+        "chance 10"
+    ],
+    
+    "whitelist":
+    [
+    ],
+    
+    "blacklist":
+    [
+    ],
+    
+    "maintainSeriesOrder" : false
+}

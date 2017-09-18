@@ -84,7 +84,7 @@ def is_video_playing():
 
 
 if __name__ == "__main__":
-    configuration_json = json.load(open("Configuration.json"))
+    configuration_json = json.load(open("Channels/Configuration.json"))
     
     video_filetypes = [".mp4", ".avi", ".mkv", ".flv", ".ogm"]
     shows = randomize_videos(get_files_of_type_from_folders(configuration_json["folders"]["shows"], video_filetypes))

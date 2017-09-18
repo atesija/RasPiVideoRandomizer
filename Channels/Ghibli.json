@@ -7,8 +7,6 @@
         ],
         "shows":
         [
-            "/media/pi/Windfish/Videos/Shows",
-            "/media/pi/Windfish/Videos/Anime"
         ],
         "intros":
         [
@@ -28,29 +26,25 @@
         ]
     },
     
-    "startvideoorder":
+    "startVideoOrder":
     [
-        "intro",
         "lineup"
     ],
 
-    "loopvideoorder":
+    "loopVideoOrder":
     [
-        "show",
-        "commercial",
-        "repeat 1 3",
-        "bump",
-        "lineup",
-        "chance 10"
+        "movie",
+        "bump"
     ],
     
     "whitelist":
     [
+        "Ghibli"
     ],
     
     "blacklist":
     [
     ],
     
-    "series" : false
+    "maintainSeriesOrder" : false
 }
