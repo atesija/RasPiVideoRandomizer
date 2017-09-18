@@ -99,12 +99,12 @@ if __name__ == "__main__":
     shows = blacklist_videos(shows, configuration_json["blacklist"])
     movies = blacklist_videos(movies, configuration_json["blacklist"])
 
-    video_order = build_video_order(configuration_json["startvideoorder"])
-    video_order += build_video_order(configuration_json["loopvideoorder"])
+    video_order = build_video_order(configuration_json["startVideoOrder"])
+    video_order += build_video_order(configuration_json["loopVideoOrder"])
     
     while True:
         if not video_order:
-            video_order = build_video_order(configuration_json["loopvideoorder"])
+            video_order = build_video_order(configuration_json["loopVideoOrder"])
         next_video_type = video_order.pop(0)
         
         if next_video_type == "show":  
