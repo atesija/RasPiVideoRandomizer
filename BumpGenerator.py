@@ -6,7 +6,7 @@ import random
 import json
 from FileFinder import get_files_of_type_from_folders
 
-def play_bump():
+def play_bump(channel_json):
     pygame.init()
 
     #We don't want to see the mouse over the bump
@@ -20,7 +20,7 @@ def play_bump():
 
     #Open a random music file and play it
     random.seed()
-    configuration_json = json.load(open("Configuration.json"))  
+    configuration_json = json.load(open(channel_json))  
     song = random.choice(get_files_of_type_from_folders(configuration_json["folders"]["music"], ".mp3"))
     song = song.rstrip()
     pygame.mixer.init()

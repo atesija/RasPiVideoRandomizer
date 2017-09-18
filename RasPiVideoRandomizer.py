@@ -83,12 +83,7 @@ def is_video_playing():
                 return True
     return False
 
-
-if __name__ == "__main__":
-    json_channel = "Channels/Configuration.json";
-    if(len(sys.argv) > 1):
-        json_channel = sys.argv[1]
-        
+def play_raspivideorandomizer(json_channel):        
     configuration_json = json.load(open(json_channel))
     
     video_filetypes = [".mp4", ".avi", ".mkv", ".flv", ".ogm"]
@@ -120,7 +115,7 @@ if __name__ == "__main__":
             if random.randint(0, 1) == 0:
                 play_video(bumps.pop())
             else:
-                BumpGenerator.play_bump()
+                BumpGenerator.play_bump(json_channel)
         elif next_video_type == "commercial":
             play_video(commercials.pop())
         elif next_video_type == "intro":
@@ -132,3 +127,8 @@ if __name__ == "__main__":
         while is_video_playing() is True:
             sleep(1)
 
+if __name__ == "__main__":
+    json_channel = "Channels/Configuration.json";
+    if(len(sys.argv) > 1):
+        json_channel = sys.argv[1]
+    play_raspivideorandomizer(json_channel)
