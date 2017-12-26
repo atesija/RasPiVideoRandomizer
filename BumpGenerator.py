@@ -41,7 +41,7 @@ def play_bump(channel_json):
         print "Unable to load file %s" % bump_file
         pygame.quit()
         sys.exit()
-    print bump_file
+
     #Replace text in the template
     for bump_part in bump_json["bumpTemplate"]:
         for replacement in bump_json["replacements"]:
