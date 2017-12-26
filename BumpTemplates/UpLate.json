@@ -29,7 +29,10 @@
         [
             "go outside",
             "leave the house",
-            "stop watching"
+            "stop watching",
+	    "have a family",
+	    "plant some trees",
+	    "learn a new skill"
         ],
         "#activity":
         [

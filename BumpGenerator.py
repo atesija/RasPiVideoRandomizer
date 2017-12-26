@@ -8,6 +8,7 @@ from FileFinder import get_files_of_type_from_folders
 
 def play_bump(channel_json):
     pygame.init()
+    random.seed()
 
     #We don't want to see the mouse over the bump
     pygame.mouse.set_visible(False)
@@ -19,13 +20,13 @@ def play_bump(channel_json):
     screen_height = pygame.display.Info().current_h
 
     #Open a random music file and play it
-    random.seed()
-    configuration_json = json.load(open(channel_json))  
-    song = random.choice(get_files_of_type_from_folders(configuration_json["folders"]["music"], ".mp3"))
-    song = song.rstrip()
     pygame.mixer.init()
-    pygame.mixer.music.load(song)
-    pygame.mixer.music.play()
+    if channel_json:
+        configuration_json = json.load(open(channel_json))  
+        song = random.choice(get_files_of_type_from_folders(configuration_json["folders"]["music"], ".mp3"))
+        song = song.rstrip()
+        pygame.mixer.music.load(song)
+        pygame.mixer.music.play()
 
     #Find all bump templates
     bump_template_list = glob.glob("BumpTemplates/*.json")
@@ -40,7 +41,7 @@ def play_bump(channel_json):
         print "Unable to load file %s" % bump_file
         pygame.quit()
         sys.exit()
-
+    print bump_file
     #Replace text in the template
     for bump_part in bump_json["bumpTemplate"]:
         for replacement in bump_json["replacements"]:
@@ -81,3 +82,7 @@ def play_bump(channel_json):
 
     pygame.quit()
     #sys.exit()
+
+if __name__ == '__main__':
+    for i in range(0, 10):
+        play_bump(None)

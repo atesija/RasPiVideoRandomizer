@@ -19,25 +19,23 @@
     {
         "#firstpart":
         [
-            "What kind of line do you use to catch a boxing fish?",
+            "What do you call a row of boxers?",
             "Want to hear a joke about paper?",
             "What did the chicken say when it crossed the road?",
             "What do you call a rhino combined with an elephant?",
-            "What do you call a rhino combined with an elephant?"
+            "What do you call a rhino combined with an elephant?",
+	    "Which president was the best at laundry?",
+	    "What do you call two lazy french fries?"
         ],
         "#secondpart":
         [
             "Punchline",
-            "Nevermind, it's terrible",
+            "Nevermind, it's tear-able",
             "To get to the other side",
             "I don't know, it's irrelephant",
-            "elephino!"
-        ],
-        "#response":
-        [
-            "Orange who?",
-            "Who who?",
-            "You who?"
+            "elephino!",
+	    "George Washing-ton",
+	    "Couch potatos"
         ]
     }
 }
