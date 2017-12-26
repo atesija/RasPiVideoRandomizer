@@ -5,6 +5,7 @@ import random
 import json
 import sys
 import BumpGenerator
+import LineupDisplay
 from FileFinder import get_files_of_type_from_folders
 from subprocess import Popen, PIPE
 from time import sleep
@@ -120,6 +121,8 @@ def play_raspivideorandomizer(json_channel):
             play_video(commercials.pop())
         elif next_video_type == "intro":
             play_video(intros.pop())
+        elif next_video_type == "lineup":
+            LineupDisplay.play_lineup(json_channel, shows[:3])
         else:
             print "unkown"        
 

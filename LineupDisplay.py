@@ -1,12 +1,11 @@
 import pygame
 import time
 import sys
-import glob
 import random
 import json
 from FileFinder import get_files_of_type_from_folders
 
-def play_bump(channel_json):
+def play_lineup(channel_json, upcoming_video_list):
     pygame.init()
     random.seed()
 
@@ -28,45 +27,28 @@ def play_bump(channel_json):
         pygame.mixer.music.load(song)
         pygame.mixer.music.play()
 
-    #Find all bump templates
-    bump_template_list = glob.glob("BumpTemplates/*.json")
-
-    #Choose a random template and open it
-    bump_file = random.choice(bump_template_list)
-    bump_json = None
-    with open(bump_file) as json_file:
-        bump_json = json.load(json_file)
-        
-    if(bump_json == None):
-        print "Unable to load file %s" % bump_file
-        pygame.quit()
-        sys.exit()
-
-    #Replace text in the template
-    for bump_part in bump_json["bumpTemplate"]:
-        for replacement in bump_json["replacements"]:
-            bump_part["text"] = bump_part["text"].replace(replacement, random.choice(bump_json["replacements"][replacement]))
-
-    #Replace text where each option has to be at the same index
-    if(len(bump_json["orderedReplacements"]) > 0):
-        replacement_index = random.randint(0, len(bump_json["orderedReplacements"].values()[0]) - 1)
-        for bump_part in bump_json["bumpTemplate"]:
-            for replacement in bump_json["orderedReplacements"]:
-                bump_part["text"] = bump_part["text"].replace(replacement, bump_json["orderedReplacements"][replacement][replacement_index])
-
     #Set up font
     white = 255, 255, 255
     font = pygame.font.Font(None, screen_height / 10)
 
-    #Loop through each part of the bump and display it for the proper time
+    #Announce the lineup
+    announcement_text = ["Tonight's lineup:", "Coming up:", "Here's what's next:"]
     black = 0, 0, 0
-    for bump_part in bump_json["bumpTemplate"]:
+    screen.fill(black)
+    text = font.render(random.choice(announcement_text), True, white)
+    textrect = text.get_rect(center = (screen_width / 2, screen_height / 2))
+    screen.blit(text, textrect)
+    pygame.display.flip()
+    time.sleep(3)
+    
+    #Loop through each part of the bump and display it for the proper time
+    for video_file_name in upcoming_video_list:
         screen.fill(black)
-        text = font.render(bump_part["text"], True, white)
+        text = font.render(video_file_name, True, white)
         textrect = text.get_rect(center = (screen_width / 2, screen_height / 2))
         screen.blit(text, textrect)
         pygame.display.flip()
-        time.sleep(float(bump_part["time"]))
+        time.sleep(3)
 
     #Display the logo at the end 
     logo = pygame.image.load("Logo.png")
@@ -84,4 +66,4 @@ def play_bump(channel_json):
     #sys.exit()
 
 if __name__ == '__main__':
-    play_bump(None)
+    play_lineup(None, [])
