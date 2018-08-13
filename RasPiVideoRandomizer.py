@@ -122,7 +122,11 @@ def play_raspivideorandomizer(json_channel):
         elif next_video_type == "intro":
             play_video(intros.pop())
         elif next_video_type == "lineup":
-            LineupDisplay.play_lineup(json_channel, shows[:3])
+            show_names = shows[-3:]
+            show_names = show_names[::-1]
+            for i in range(len(show_names)):
+                show_names[i] = show_names[i].split("/")[-3:]
+            LineupDisplay.play_lineup(json_channel, show_names)
         else:
             print "unkown"        
 

@@ -44,9 +44,12 @@ def play_lineup(channel_json, upcoming_video_list):
     #Loop through each part of the bump and display it for the proper time
     for video_file_name in upcoming_video_list:
         screen.fill(black)
-        text = font.render(video_file_name, True, white)
-        textrect = text.get_rect(center = (screen_width / 2, screen_height / 2))
-        screen.blit(text, textrect)
+        height_location = 0
+        for name in video_file_name:
+            text = font.render(name, True, white)
+            textrect = text.get_rect(center = (screen_width / 2, (screen_height / 2) + ((screen_height / 8) * height_location)))
+            screen.blit(text, textrect)
+            height_location += 1
         pygame.display.flip()
         time.sleep(3)
 

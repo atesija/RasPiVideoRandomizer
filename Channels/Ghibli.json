@@ -28,13 +28,11 @@
     
     "startVideoOrder":
     [
-        "lineup"
     ],
 
     "loopVideoOrder":
     [
-        "movie",
-        "bump"
+        "movie"
     ],
     
     "whitelist":
