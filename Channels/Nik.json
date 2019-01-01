@@ -1,0 +1,52 @@
+{
+    "folders": 
+    {
+        "movies":
+        [
+            "/media/pi/Windfish/Videos/Movies"
+        ],
+        "shows":
+        [
+            "/media/pi/Windfish/Videos/Shows",
+            "/media/pi/Windfish/Videos/Anime"
+        ],
+        "intros":
+        [
+            "/media/pi/Windfish/Intros"
+        ],
+        "bumps":
+        [
+            "/media/pi/Windfish/Bumps"
+        ],
+        "commercials":
+        [
+            "/media/pi/Windfish/Commercials"
+        ],
+        "music":
+        [
+            "/media/pi/Windfish/Music"
+        ]
+    },
+    
+    "startVideoOrder":
+    [
+        "intro",
+        "lineup"
+    ],
+
+    "loopVideoOrder":
+    [
+        "show"
+    ],
+    
+    "whitelist":
+    [
+        "Sponge"
+    ],
+    
+    "blacklist":
+    [
+    ],
+    
+    "maintainSeriesOrder" : false
+}
