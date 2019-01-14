@@ -15,4 +15,12 @@ while !show_filenames.empty? do
     show_filenames.delete_at(index) if show_filenames[index].empty?
 end
 
-puts final_show_list 
+final_show_list.each do |show|
+    puts "Playing: #{show}"
+    `lxterminal -e omxplayer '#{show}' -b -o hdmi`
+    sleep 1
+    while `ps ax`.include?('omxplayer') do
+        sleep 1
+    end
+end
+
