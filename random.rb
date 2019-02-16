@@ -3,10 +3,14 @@ COMMERCIAL_LOCATION = '/media/pi/Windfish/Commercials/**/*'
 BUMP_LOCATION = '/media/pi/Windfish/Bumps/**/*'
 INTRO_LOCATION = '/media/pi/Windfish/Intros/**/*'
 
-all_videos = Dir[VIDEO_LOCATION].select { |f| File.file? f }
-commercial_videos = Dir[COMMERCIAL_LOCATION].select { |f| File.file? f }
-bump_videos = Dir[BUMP_LOCATION].select { |f| File.file? f }
-intro_videos = Dir[INTRO_LOCATION].select { |f| File.file? f }
+def get_videos_from_dir(directory)
+    Dir[directory].select { |f| File.file? f }
+end
+
+all_videos = get_videos_from_dir(VIDEO_LOCATION)
+commercial_videos = get_videos_from_dir(COMMERCIAL_LOCATION)
+bump_videos = get_videos_from_dir(BUMP_LOCATION)
+intro_videos = get_videos_from_dir(INTRO_LOCATION)
 
 shows = ARGV
 final_show_list = shows.empty? ? all_videos : []
