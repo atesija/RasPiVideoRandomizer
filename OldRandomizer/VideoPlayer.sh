@@ -1,0 +1,2 @@
+cd RasPiVideoRandomizer/RasPiVideoRandomizer/
+python ChannelEditor.py
