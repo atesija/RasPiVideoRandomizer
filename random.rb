@@ -4,6 +4,9 @@ BUMP_LOCATION = '/media/pi/Windfish/Bumps/**/*'
 INTRO_LOCATION = '/media/pi/Windfish/Intros/**/*'
 COMMERCIALS_PER_VIDEO = 2
 
+commercials = ARGV.include?('-c')
+ARGV.delete('-c')
+
 def get_videos_from_dir(directory)
     Dir[directory].select { |f| File.file? f }
 end
@@ -25,8 +28,13 @@ interstitial_videos = commercial_videos + bump_videos
 interstitial_videos.shuffle!
 intro_videos.shuffle!
 
-final_video_list = full_shows_list.zip(interstitial_videos.each_slice(COMMERCIALS_PER_VIDEO).to_a).flatten.compact
-final_video_list.unshift(intro_videos[0]) if !intro_videos.empty?
+final_video_list = []
+if commercials
+    final_video_list = full_shows_list.zip(interstitial_videos.each_slice(COMMERCIALS_PER_VIDEO).to_a).flatten.compact
+    final_video_list.unshift(intro_videos[0]) if !intro_videos.empty?
+else
+    final_video_list = full_shows_list
+end
 
 final_video_list.each do |show|
     puts "Playing: #{show}"
@@ -37,4 +45,3 @@ final_video_list.each do |show|
         sleep 1
     end
 end
-
